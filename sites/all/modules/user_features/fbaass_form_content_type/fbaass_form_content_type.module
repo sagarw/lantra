@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the FBAASS Form & Content Type feature.
+ */
+
+include_once 'fbaass_form_content_type.features.inc';

@@ -1,0 +1,10 @@
+name = Job creation redirect
+description = Job creation redirect
+core = 7.x
+package = Lantra Rules
+version = 7.x-1.0
+dependencies[] = entity
+dependencies[] = rules
+features[features_api][] = api:2
+features[rules_config][] = rules_job_creation_redirect
+project path = sites/all/modules/user_features

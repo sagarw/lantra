@@ -1,0 +1,12 @@
+name = Lantra Course & Provider Report
+description = Lantra Course & Provider Report
+core = 7.x
+package = Lantra Views Features
+version = 7.x-1.2
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = l
+features[views_view][] = la_course_provider_report
+features_exclude[dependencies][ctools] = ctools
+project path = sites/all/modules/user_features

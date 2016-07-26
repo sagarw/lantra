@@ -1,0 +1,10 @@
+name = Course block learners view
+description = Course block learners view
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.1
+dependencies[] = fe_block
+dependencies[] = views
+features[fe_block_settings][] = views-support_views-block_5
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

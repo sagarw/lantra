@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Lantra Support Views feature.
+ */
+
+include_once 'lantra_support_views.features.inc';

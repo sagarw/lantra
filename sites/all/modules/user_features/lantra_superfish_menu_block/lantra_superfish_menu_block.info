@@ -1,0 +1,10 @@
+name = Lantra Superfish menu block
+description = Lantra Superfish menu block
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = superfish
+features[fe_block_settings][] = superfish-1
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

@@ -1,0 +1,13 @@
+name = Course Variation Taxonomy
+description = Course Variation Taxonomy
+core = 7.x
+package = Lantra Taxonomies
+version = 7.x-1.0
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = strongarm
+dependencies[] = taxonomy
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[taxonomy][] = course_variation
+project path = sites/all/modules/user_features

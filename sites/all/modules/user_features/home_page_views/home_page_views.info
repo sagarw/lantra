@@ -1,0 +1,16 @@
+name = Home Page Views
+description = Home Page Views & Blocks
+core = 7.x
+package = Lantra Views Features
+version = 7.x-1.11
+dependencies[] = fe_block
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[fe_block_settings][] = views-6af53b706de8be0b6f9703e597170958
+features[fe_block_settings][] = views-home_page_views-recent_jobs
+features[fe_block_settings][] = views-home_page_views-recent_news
+features[fe_block_settings][] = views-home_page_views-top_cat
+features[features_api][] = api:2
+features[views_view][] = home_page_views
+features_exclude[dependencies][ctools] = ctools
+project path = sites/all/modules/user_features

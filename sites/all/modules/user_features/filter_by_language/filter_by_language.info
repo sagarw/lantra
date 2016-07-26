@@ -1,0 +1,10 @@
+name = Filter by language
+description = Filter by language
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.1
+dependencies[] = facetapi
+dependencies[] = fe_block
+features[fe_block_settings][] = facetapi-eqlwmGIoLqm7QUFmBTCCAHtf7vulFeib
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

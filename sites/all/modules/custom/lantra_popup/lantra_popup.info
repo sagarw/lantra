@@ -1,0 +1,4 @@
+name = Lantra Popup
+description = Display a configurable welcome message when users login
+core = 7.x
+files[] = lantra_popup.module

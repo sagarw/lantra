@@ -1,0 +1,84 @@
+<?php
+/*
+ *	hook_node_submit()
+ *	trigger when a node form is submited.
+ */
+function custom_synchronize_child_node_submit(&$node, $form, &$form_state){
+	// Condition for content type so code do not affect unwanted nodes and content type.
+	// Add more content type with OR condition
+	if($node->type == 'la_course'){
+		$nid = $node->nid;
+		// code to find out which field is entity refrence refrence field.
+		$instances_info = field_info_instances('node', $node->type);
+
+		foreach($instances_info as $field_info){
+			if($field_info['widget']['type'] == 'entityreference_autocomplete'){
+				$refrence_field = $node->$field_info['field_name'];
+				$refrence_field_name = $field_info['field_name'];
+				//watchdog("refrence_field", $refrence_field);
+			}
+		}
+
+		watchdog("refrence_field", "<pre>".print_r($refrence_field, true)."</pre>");
+		if(isset($refrence_field['und'][0]['target_id'])){
+			$perent = node_load($refrence_field['und'][0]['target_id']);	// Featch perent node
+		}
+		else{
+			$field_table_name ="field_data_".$refrence_field_name;	//Table Name
+			$field_colum_name = $refrence_field_name."_target_id";	//Column Name in table
+
+			$query = db_select($field_table_name, 'fcti')		// Query to fetch all children
+					 ->fields('fcti', array('entity_id'))
+					 ->condition($field_colum_name, $nid)
+					 ->execute()->fetchAll();
+			foreach ($query as $chield) {
+				$chields[] = $chield->entity_id;
+			}
+		}
+		// synchronize child node with perent when child append------- Note: excecuted if edited node is child
+		if(isset($perent)){
+			// code to find out which fields are autofill fields
+			$instances_info = field_info_instances('node', $node->type);
+
+			foreach($instances_info as $field_info){
+				if($field_info['widget']['type'] == 'entityreference_autocomplete'){
+					$update_fields = $field_info['settings']['behaviors']['autofill']['fields'];
+					$refrence_field = $field_info['field_name'];
+				}
+			}
+			// Code for replace field value
+			foreach($update_fields as $key => $field)
+			{
+				if($field != '0'){
+						$node->$key = $perent->$field;	//update node(child) according to it's parent
+				}
+			}
+			drupal_set_message( "This node is synchronized with '" . $perent->title . "' node!\n");
+		}
+		// synchronize child node with parent when parent append------- Note: exicuted if edited node is parent
+		else if(isset($chields)){
+			foreach ($chields as $child_nid) {
+				$chield = node_load($child_nid);
+				// code to find out which fields are autofill fields
+				$instances_info = field_info_instances('node', $chield->type);
+
+				foreach($instances_info as $field_info){
+					if($field_info['widget']['type'] == 'entityreference_autocomplete'){
+						$update_fields = $field_info['settings']['behaviors']['autofill']['fields'];
+					}
+				}
+				// Code for replace field value
+				foreach($update_fields as $key => $field)
+				{
+					if($field != '0'){
+							$chield->$key = $node->$field;		// update children accourding to node(parent).
+					}
+				}
+				node_save($chield);
+				drupal_set_message( "Child Node " . $chield->title . " updated!\n");
+			}
+		}
+	}
+}
+
+?>

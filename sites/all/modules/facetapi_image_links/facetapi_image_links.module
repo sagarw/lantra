@@ -1,0 +1,39 @@
+<?php
+/**
+ * Implements hook_facetapi_widgets().
+ */
+function facetapi_image_links_facetapi_widgets() {
+  return array(
+    'facetapi_image_links_widget' => array(
+      'handler' => array(
+        'label' => t('Links with images'),
+        'class' => 'FacetapiImageLinksWidget',
+        'parent' => 'FacetapiWidgetLinks',
+        'query types' => array('term'),
+      ),
+    ),
+  );
+}
+
+
+//TODO: or make more general, entity links?
+
+/**
+ * Implements hook_theme().
+ */
+function facetapi_image_links_theme() {
+  return array(
+    'facetapi_image_links_link_inactive' => array(
+      'arguments' => array('text' => NULL, 'image' => NULL, 'path' => NULL, 'options' => array(), 'count' => 0),
+      'file' => 'facetapi_image_links.theme.inc',
+    ),
+    'facetapi_image_links_link_active' => array(
+      'arguments' => array('text' => NULL, 'image' => NULL, 'path' => NULL, 'options' => array()),
+      'file' => 'facetapi_image_links.theme.inc',
+    ),
+    'facetapi_image_links_text_container' => array(
+      'arguments' => array('text' => NULL),
+      'file' => 'facetapi_image_links.theme.inc',
+    ),
+  );
+}

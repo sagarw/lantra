@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file
+ * event_views.features.inc
+ */
+
+/**
+ * Implements hook_views_api().
+ */
+function event_views_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
+}

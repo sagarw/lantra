@@ -1,0 +1,10 @@
+name = Course Category block
+description = Course Category block on course selector page
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = views
+features[fe_block_settings][] = views--exp-courses-course_selector
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Event Taxonomy feature.
+ */
+
+include_once 'event_taxonomy.features.inc';

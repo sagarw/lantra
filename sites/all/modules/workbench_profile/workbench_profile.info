@@ -1,0 +1,12 @@
+name = "Workbench Profile"
+description = "Integration of profile creation for the Workbench editorial suite."
+package = "Workbench"
+core = "7.x"
+dependencies[] = "workbench"
+dependencies[] = "profile2"
+; Information added by drupal.org packaging script on 2013-10-26
+version = "7.x-1.1+1-dev"
+core = "7.x"
+project = "workbench_profile"
+datestamp = "1382797191"
+

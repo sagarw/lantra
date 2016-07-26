@@ -1,0 +1,12 @@
+name = Footer blocks
+description = Footer feature containing Footer, Left Footer, Middle Left Footer, Middle Right Footer and Right Footer region
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = menu
+dependencies[] = social_media_links
+features[fe_block_settings][] = menu-menu-footer-menu
+features[fe_block_settings][] = social_media_links-social-media-links
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

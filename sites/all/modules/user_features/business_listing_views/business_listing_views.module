@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Business Listing VIews feature.
+ */
+
+include_once 'business_listing_views.features.inc';

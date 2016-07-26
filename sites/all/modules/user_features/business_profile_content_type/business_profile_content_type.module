@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Business Profile Content Type feature.
+ */
+
+include_once 'business_profile_content_type.features.inc';

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Lantra Course & Provider Report feature.
+ */
+
+include_once 'lantra_course_provider_report.features.inc';

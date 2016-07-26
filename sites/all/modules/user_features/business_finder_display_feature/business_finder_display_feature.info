@@ -1,0 +1,12 @@
+name = Business Finder Display Feature
+description = Displays profile fields, linked to by the business finder.
+core = 7.x
+package = Lantra Views Features
+version = 7.x-1.9
+dependencies[] = panels
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = business_finder_business_details
+features_exclude[dependencies][ctools] = ctools
+project path = sites/all/modules/user_features

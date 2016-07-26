@@ -1,0 +1,11 @@
+name = Navigation & Admin block
+description = Navigation & Admin block
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.11
+dependencies[] = fe_block
+features[fe_block_settings][] = menu-menu-admin-dev-menu
+features[fe_block_settings][] = system-navigation
+features[features_api][] = api:2
+features_exclude[dependencies][menu] = menu
+project path = sites/all/modules/user_features

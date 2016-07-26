@@ -1,0 +1,13 @@
+name = FBAASS Views
+description = Views and blocks for the FBAASS features
+core = 7.x
+package = Lantra Views Features
+version = 7.x-1.12
+dependencies[] = fe_block
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[fe_block_settings][] = views-ab1f39195bdc5b8b6987f100c15b5908
+features[features_api][] = api:2
+features[views_view][] = fbaass_views
+features_exclude[dependencies][ctools] = ctools
+project path = sites/all/modules/user_features

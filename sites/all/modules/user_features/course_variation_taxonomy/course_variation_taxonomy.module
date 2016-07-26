@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Course Variation Taxonomy feature.
+ */
+
+include_once 'course_variation_taxonomy.features.inc';

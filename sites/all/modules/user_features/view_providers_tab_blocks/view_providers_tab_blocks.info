@@ -1,0 +1,13 @@
+name = View Providers Tab blocks
+description = View Providers Tab blocks
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = views
+features[fe_block_settings][] = views-428a1307dec994d91e071cf8880f24ef
+features[fe_block_settings][] = views-providers-tab_block
+features[fe_block_settings][] = views-providers-tab_block_list_view
+features[fe_block_settings][] = views-providers-tab_block_map_view
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

@@ -1,0 +1,12 @@
+name = Lantra Dev Menus
+description = Lantra Dev Menus
+core = 7.x
+package = Lantra Menus
+version = 7.x-1.4
+dependencies[] = fe_block
+dependencies[] = features
+dependencies[] = menu
+features[fe_block_settings][] = menu-menu-dev-testing
+features[features_api][] = api:2
+features[menu_custom][] = menu-dev-testing
+project path = sites/all/modules/user_features

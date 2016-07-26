@@ -1,0 +1,8 @@
+name = Taxonomy Term Permissions
+description = Taxonomy Term Permissions
+core = 7.x
+package = Lantra Taxonomies
+version = 7.x-1.0
+dependencies[] = term_permissions
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

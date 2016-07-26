@@ -1,0 +1,16 @@
+name = FBAASS Search Block
+description = FBAASS Search Block and fbaass search tabs
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.6
+dependencies[] = ctools
+dependencies[] = facetapi
+dependencies[] = fbaass_search_search_index
+dependencies[] = fe_block
+dependencies[] = views
+features[ctools][] = facetapi:facetapi_defaults:1
+features[facetapi][] = search_api@fbaass_search_index:block:field_fbaass_county
+features[fe_block_settings][] = views-4cfec151c9593261b90ea74d6565844c
+features[fe_block_settings][] = views-aae6f62ad1ed3a11eca01aa8dafafd22
+features[fe_block_settings][] = views-fbaass_search-block_1
+features[features_api][] = api:2

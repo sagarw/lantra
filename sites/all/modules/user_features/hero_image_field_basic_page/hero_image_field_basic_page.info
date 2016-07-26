@@ -1,0 +1,10 @@
+name = Hero Image field basic page
+description = Hero Image field basic page
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = fieldblock
+features[fe_block_settings][] = fieldblock-b3497ccc5741834b1744244f3e8eee8a
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

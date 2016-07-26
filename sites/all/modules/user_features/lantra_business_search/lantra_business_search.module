@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Lantra Business Search feature.
+ */
+
+include_once 'lantra_business_search.features.inc';

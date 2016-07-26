@@ -1,0 +1,17 @@
+name = Lantra Moderation Rules
+description = Lantra Moderation Rules
+core = 7.x
+package = Lantra Rules
+version = 7.x-1.1
+features[features_api][] = api:2
+features[rules_config][] = rules_content_approved
+features[rules_config][] = rules_content_rejected
+features[rules_config][] = rules_la_course_moderation_rejection
+features[rules_config][] = rules_profile_moderation_flag
+features_exclude[dependencies][entity] = entity
+features_exclude[dependencies][flag] = flag
+features_exclude[dependencies][revisioning] = revisioning
+features_exclude[dependencies][rules] = rules
+features_exclude[dependencies][workbench_moderation] = workbench_moderation
+features_exclude[dependencies][workflow] = workflow
+project path = sites/all/modules/user_features

@@ -1,0 +1,11 @@
+name = Business Finder search blocks
+description = Business finder search blocks for list and map view
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = views
+features[fe_block_settings][] = views-93ea9dd23dd3d8c797ad8988abd2eef9
+features[fe_block_settings][] = views-cf5fe5980f7d6c0502e44b02bde7a396
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

@@ -1,0 +1,91 @@
+<?php
+
+/**
+* Implements hook_menu_alter()
+*/
+function workbench_moderation_notes_menu_alter(&$items) {
+  $items['node/%node/moderation']['page callback'] = 'workbench_moderation_notes_node_history_view';
+  $items['node/%node/moderation']['file'] = 'workbench_moderation_notes.pages.inc';
+  $items['node/%node/moderation']['file path'] = drupal_get_path('module', 'workbench_moderation_notes');
+}
+
+function workbench_moderation_notes_form_workbench_moderation_moderate_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['#access']) && $form['#access'] === FALSE) {
+    return;
+  }
+  $form['note'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Notes'),
+    '#rows' => 2,
+    '#weight' => -4,
+    );
+
+  $form['#submit'] = array('workbench_moderation_notes_submit_notes');
+  foreach($form['#submit'] as $idx => $callback) {
+    if ($callback == 'workbench_moderation_moderate_form_submit') {
+      unset($form['#submit'][$idx]);
+    }
+  }
+}
+
+/*
+ * Submit callback to add the note to a workbench record.
+ */
+function workbench_moderation_notes_submit_notes($form, &$form_state) {
+  workbench_moderation_moderate_form_submit($form, $form_state);
+
+  $query = db_select('workbench_moderation_node_history', 'w')
+                  ->condition('w.nid', $form_state['values']['node']->nid);
+  $query->addExpression('max(w.hid)', 'max_hid');
+  $latest_id = $query->execute()
+                  ->fetchField();
+
+  db_update('workbench_moderation_node_history')
+    ->condition('nid', $form_state['values']['node']->nid)
+    ->condition('hid', $latest_id)
+    ->fields(array('note' => $form_state['values']['note']))
+    ->execute();
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function workbench_moderation_notes_views_api() {
+  return array('api' => 2.0);
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function workbench_moderation_notes_token_info() {
+  // Node tokens.
+  $info['tokens']['node']['workbench-moderation-notes'] = array(
+    'name' => t('Current Workbench moderation notes'),
+    'description' => t('Current Workbench moderation note for the node.'),
+    'type' => 'array',
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function workbench_moderation_notes_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  // Node tokens.
+  if ($type == 'node' && !empty($data['node'])) {
+    $node = $data['node'];
+    $state = '';
+    if (is_object($node) && property_exists($node, 'workbench_moderation') && isset($node->workbench_moderation['current'])){
+       $state = $node->workbench_moderation['current'];
+    }
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'workbench-moderation-notes':
+            $replacements[$original] = $state->note;
+            break;
+       }
+    }
+  }
+  return $replacements;
+}

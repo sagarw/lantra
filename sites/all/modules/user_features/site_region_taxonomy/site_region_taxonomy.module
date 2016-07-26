@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Site Region Taxonomy feature.
+ */
+
+include_once 'site_region_taxonomy.features.inc';

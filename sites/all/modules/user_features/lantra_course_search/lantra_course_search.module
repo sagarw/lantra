@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Lantra Course Search feature.
+ */
+
+include_once 'lantra_course_search.features.inc';

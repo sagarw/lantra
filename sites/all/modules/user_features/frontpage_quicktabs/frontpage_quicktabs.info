@@ -1,0 +1,11 @@
+name = Frontpage Quicktabs
+description = Frontage Search Quicktabs
+core = 7.x
+package = Lantra Quicktabs
+version = 7.x-1.1
+dependencies[] = ctools
+dependencies[] = quicktabs
+features[ctools][] = quicktabs:quicktabs:1
+features[features_api][] = api:2
+features[quicktabs][] = frontpage_search_block
+project path = sites/all/modules/user_features

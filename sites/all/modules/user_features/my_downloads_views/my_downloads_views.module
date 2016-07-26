@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the My Downloads Views feature.
+ */
+
+include_once 'my_downloads_views.features.inc';

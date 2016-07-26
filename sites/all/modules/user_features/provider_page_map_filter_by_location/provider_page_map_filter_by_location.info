@@ -1,0 +1,10 @@
+name = Provider page map filter by location
+description = Provider page map filter by location
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = views
+features[fe_block_settings][] = views-52566e6fa47c76257e1ba307535c1e03
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

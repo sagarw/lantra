@@ -1,0 +1,4 @@
+name = Synchronize Child node
+description = Custom module which synchronize child node with it's perent.
+core = 7.x
+package = Custom

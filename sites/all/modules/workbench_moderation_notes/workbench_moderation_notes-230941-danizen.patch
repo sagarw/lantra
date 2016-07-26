@@ -1,0 +1,162 @@
+diff --git a/sites/all/modules/contrib/workbench_moderation_notes/workbench_moderation_notes.module b/sites/all/modules/contrib/workbench_moderation_notes/workbench_moderation_notes.module
+index 93425d1..4ccd4ec 100644
+--- a/sites/all/modules/contrib/workbench_moderation_notes/workbench_moderation_notes.module
++++ b/sites/all/modules/contrib/workbench_moderation_notes/workbench_moderation_notes.module
+@@ -9,7 +9,7 @@ function workbench_moderation_notes_menu_alter(&$items) {
+   $items['node/%node/moderation']['file path'] = drupal_get_path('module', 'workbench_moderation_notes');
+ }
+ 
+-function workbench_moderation_notes_form_workbench_moderation_moderate_form_alter(&$form) {
++function workbench_moderation_notes_form_workbench_moderation_moderate_form_alter(&$form, &$form_state, $form_id) {
+   if (isset($form['#access']) && $form['#access'] === FALSE) {
+     return;
+   }
+@@ -19,14 +19,11 @@ function workbench_moderation_notes_form_workbench_moderation_moderate_form_alte
+     '#rows' => 2,
+     '#weight' => -4,
+     );
+-  unset($form['#theme']);
+-  unset($form['#attributes']['class']);
+-  $form['state']['#title'] = t('Select new status');
+-  $form['submit']['#value'] = t('Save');
+-  $form['#submit'][] = 'workbench_moderation_notes_form_workbench_moderation_moderate_form_alter_submit';
+-  foreach($form['#submit'] as $k => $callback) {
++
++  $form['#submit'] = array('workbench_moderation_notes_submit_notes');
++  foreach($form['#submit'] as $idx => $callback) {
+     if ($callback == 'workbench_moderation_moderate_form_submit') {
+-      unset($form['#submit'][$k]);
++      unset($form['#submit'][$idx]);
+     }
+   }
+ }
+@@ -34,37 +31,20 @@ function workbench_moderation_notes_form_workbench_moderation_moderate_form_alte
+ /*
+  * Submit callback to add the note to a workbench record.
+  */
+-function workbench_moderation_notes_form_workbench_moderation_moderate_form_alter_submit($form, $form_state) {
+-  if (_workbench_moderation_moderate_access($form_state['values']['node'], $form_state['values']['state'])) {
+-    workbench_moderation_moderate($form_state['values']['node'], $form_state['values']['state']);
+-  }
++function workbench_moderation_notes_submit_notes($form, &$form_state) {
++  workbench_moderation_moderate_form_submit($form, $form_state);
+ 
+-  // This is not ideal, but if the form is invoked from a node's draft tab and
+-  // used to publish the node, the draft tab will not be available after
+-  // publishing, and Drupal's will throw an access denied error before it is
+-  // able to redirect to the published revision.
+-  
+   $query = db_select('workbench_moderation_node_history', 'w')
+                   ->condition('w.nid', $form_state['values']['node']->nid);
+   $query->addExpression('max(w.hid)', 'max_hid');
+   $latest_id = $query->execute()
+                   ->fetchField();
++
+   db_update('workbench_moderation_node_history')
+     ->condition('nid', $form_state['values']['node']->nid)
+     ->condition('hid', $latest_id)
+     ->fields(array('note' => $form_state['values']['note']))
+     ->execute();
+-  if (!empty($form['#destination'])) {
+-    if ($form_state['values']['state'] == workbench_moderation_state_published()) {
+-      if ($uri = entity_uri('node', $form['node']['#value'])) {
+-        $form_state['redirect'] = array($uri['path'], $uri['options']);
+-      }
+-    }
+-    else {
+-      $form_state['redirect'] = $form['#destination'];
+-    }
+-    drupal_redirect_form($form_state);
+-  }
+ }
+ 
+ /**
+diff --git a/sites/all/modules/contrib/workbench_moderation_notes/workbench_moderation_notes.pages.inc b/sites/all/modules/contrib/workbench_moderation_notes/workbench_moderation_notes.pages.inc
+index 8b5bfd6..34524bc 100644
+--- a/sites/all/modules/contrib/workbench_moderation_notes/workbench_moderation_notes.pages.inc
++++ b/sites/all/modules/contrib/workbench_moderation_notes/workbench_moderation_notes.pages.inc
+@@ -6,6 +6,9 @@
+ function workbench_moderation_notes_node_history_view($node) {
+   global $user;
+ 
++  // Page title ?
++  drupal_set_title(t('History of %title', array('%title' => $node->title)), PASS_THROUGH);
++
+   // Alert if there is no live node
+   if (!isset($node->workbench_moderation['published'])) {
+     drupal_set_message(t('Currently there is no published revision of this content.'), 'warning');
+@@ -29,6 +32,8 @@ function workbench_moderation_notes_node_history_view($node) {
+   foreach ($revisions as $revision) {
+     $row = array(
+       'data' => array(
++        'vid' => '',
++        'info' => '',
+         'date' => '',
+         'revision' => '',
+         'moderation' => '',
+@@ -48,6 +53,10 @@ function workbench_moderation_notes_node_history_view($node) {
+     }
+ 
+     // Add row data.
++    $row['data']['vid'] = $revision->vid;
++    $row['data']['info'] .= '<div class="revision-title">' . check_plain($revision->title) . '</div>';
++    $row['data']['info'] .= '<div class="revision-log description">' . filter_xss($revision->log) . '</div>';
++    $row['data']['info'] .= '<div class="revision-user description">' . t('Revised by !user', array('!user' => theme('username', array('account' => $revision)))) . '</div>';
+     $row['data']['date'] = format_date($revision->timestamp, 'short');
+ 
+     // Revision operations.
+@@ -72,6 +81,7 @@ function workbench_moderation_notes_node_history_view($node) {
+     $query->leftJoin('users', 'u', 'm.uid = u.uid');
+     $query->condition('m.vid', $revision->vid)
+       ->orderBy('m.stamp', 'DESC')
++      ->orderBy('m.hid', 'DESC')
+       ->fields('m')
+       ->fields('u', array('name'));
+ 
+@@ -107,12 +117,12 @@ function workbench_moderation_notes_node_history_view($node) {
+     foreach ($moderations as $moderation) {
+       if ($moderation->from_state) {
+         $note = ($moderation->note)
+-                  ?t('<br/><strong>Note:</strong><p>@note</p>', array('@note' => $moderation->note))
+-                  : '';
+-        $items[] = t('From @from_state --> @to_state on %date by !user !note',
++          ?t('<br/><span style="text-decoration: underline;">Note:</span> @note', array('@note' => $moderation->note))
++          : '';
++        $items[] = t('From %from_state --> %to_state on %date by !user !note',
+           array(
+-            '@from_state' => workbench_moderation_state_label($moderation->from_state),
+-            '@to_state' => workbench_moderation_state_label($moderation->state),
++            '%from_state' => workbench_moderation_state_label($moderation->from_state),
++            '%to_state' => workbench_moderation_state_label($moderation->state),
+             '%date' => format_date($moderation->stamp, 'short'),
+             '!user' => theme('username', array('account' => $moderation)),
+             '!note' => $note,
+@@ -122,8 +132,8 @@ function workbench_moderation_notes_node_history_view($node) {
+       else {
+         $items[] = t('Created as @to_state on %date by !user',
+           array(
+-            '@from_state' => workbench_moderation_state_label($moderation->from_state),
+-            '@to_state' => workbench_moderation_state_label($moderation->state),
++            '%from_state' => workbench_moderation_state_label($moderation->from_state),
++            '%to_state' => workbench_moderation_state_label($moderation->state),
+             '%date' => format_date($moderation->stamp, 'short'),
+             '!user' => theme('username', array('account' => $moderation)),
+           )
+@@ -136,7 +146,7 @@ function workbench_moderation_notes_node_history_view($node) {
+   }
+ 
+   // Set the table header.
+-  $header = array(t('Date'), t('Actions'), t('Moderation notes'));
++  $header = array(t('Revision'), t('Title'), t('Date'), t('Revision actions'), t('Moderation notes'));
+ 
+   // Return properly styled output.
+   return array(
+@@ -145,7 +155,7 @@ function workbench_moderation_notes_node_history_view($node) {
+         drupal_get_path('module', 'workbench_moderation') . '/css/workbench_moderation.css',
+       ),
+     ),
+-    '#prefix' => drupal_render($moderate_form),
++    '#prefix' => '<div class="moderation-actions">' . t('Set moderation state: !moderation-actions-form', array('!moderation-actions-form' => drupal_render($moderate_form))) . '</div>',
+     '#theme' => 'table',
+     '#header' => $header,
+     '#rows' => $rows,

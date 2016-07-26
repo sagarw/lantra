@@ -1,0 +1,79 @@
+<?php
+/**
+ * Implements hook_help().
+ *
+ * Displays help and module information.
+ *
+ * @param path 
+ *   Which path of the site we're using to display help
+ * @param arg 
+ *   Array that holds the current path as returned from arg() function
+ */
+function lantra_functions_help($path, $arg) {
+  switch ($path) {
+    case "admin/help#lantra_functions":
+      return '<p>' . t("Contains a number of functions for the Lantra Awards website") . '</p>';
+      break;
+  }
+} 
+
+
+/**
+ * Implements hook_block_info().
+ */
+function lantra_functions_block_info() {
+  $blocks['current_posts'] = array(
+    // The name that will appear in the block list.
+    'info' => t('Lantra current posts'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  return $blocks;
+}
+
+
+/**
+ * Custom content function. 
+ * 
+ * Set beginning and end dates, retrieve posts from database
+ * saved in that time period.
+ * 
+ * @return 
+ *   A result set of the targeted posts.
+ */
+function lantra_functions_contents(){
+  //Get today's date.
+  $today = getdate();
+  //Calculate the date a week ago.
+  $start_time = mktime(0, 0, 0,$today['mon'],($today['mday'] - 7), $today['year']);
+  //Get all posts from one week ago to the present.
+  $end_time = time();
+
+  //Use Database API to retrieve current posts.
+  $query = db_select('node', 'n')
+    ->fields('n', array('nid', 'title', 'created'))
+    ->condition('status', 1) //Published.
+    ->condition('created', array($start_time, $end_time), 'BETWEEN')
+    ->orderBy('created', 'DESC') //Most recent first.
+    ->execute(); 
+  return $query;  
+}
+
+
+function lantra_functions_block_view($delta = '') {
+  switch ($delta) {
+    case 'current_posts':
+      $block['subject'] = t('Current posts');
+      if (user_access('access content')) {
+      // Retrieve and process data here.
+   } 
+      // Use the custom date function to retrieve data.
+      $result = current_posts_contents();
+      // Array to contain items for the block to render.
+      $items = array();
+      // Iterate over the result set and format as links.
+      foreach ($result as $node) {
+        $items[] = array(
+          'data' => l($node->title, 'node/' . $node->nid),
+        );
+    }

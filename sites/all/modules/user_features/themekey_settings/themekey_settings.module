@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Themekey Settings feature.
+ */
+
+include_once 'themekey_settings.features.inc';

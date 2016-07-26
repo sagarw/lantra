@@ -1,0 +1,13 @@
+name = Job Search Search Index
+description = Job Search Index and facet block settings.
+core = 7.x
+package = Lantra Search API
+version = 7.x-1.6
+dependencies[] = entity
+dependencies[] = facetapi
+dependencies[] = fe_block
+dependencies[] = search_api
+features[fe_block_settings][] = facetapi-Jg13NWLGTlIxuoPsJzxNm8GZ196vYfH1
+features[features_api][] = api:2
+features[search_api_index][] = job_index
+project path = sites/all/modules/user_features

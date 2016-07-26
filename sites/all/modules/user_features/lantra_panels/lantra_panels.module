@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Lantra Panels feature.
+ */
+
+include_once 'lantra_panels.features.inc';

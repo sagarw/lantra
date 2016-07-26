@@ -1,0 +1,41 @@
+<?php
+/**
+ * @file workbench_comments.module
+ * Provides tweaks and overrides to content, forms, menus, etc.
+ */
+
+
+/**
+ * @method workbench_comments_menu_alter()
+ * @param array $items
+ *
+ * Overrides for menu elements
+ *
+ */
+function workbench_comments_menu_alter(&$items) {
+
+  $items['admin/workbench/comment'] = array(
+    'title' => 'Comments',
+    'description' => 'List and edit site comments and the comment approval queue.',
+    'page callback' => 'comment_admin',
+    'access arguments' => array('administer comments'),
+    'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM,
+    'file path' => drupal_get_path('module', 'comment'),
+    'file' => 'comment.admin.inc',
+  );
+  // Tabs begin here.
+  $items['admin/workbench/comment/new'] = array(
+    'title' => 'Published comments',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+  $items['admin/workbench/comment/approval'] = array(
+    'title' => 'Unapproved comments',
+    'title callback' => 'comment_count_unpublished',
+    'page arguments' => array('approval'),
+    'access arguments' => array('administer comments'),
+    'type' => MENU_LOCAL_TASK,
+  );
+  
+}
+

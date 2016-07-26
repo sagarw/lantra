@@ -1,0 +1,10 @@
+name = News and Events Block
+description = News and Events Block
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = menu
+features[fe_block_settings][] = menu-menu-news-and-events
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

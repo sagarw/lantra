@@ -1,0 +1,44 @@
+diff --git a/workbench_moderation_notes.module b/workbench_moderation_notes.module
+index 9daf581..415feb9 100644
+--- a/workbench_moderation_notes.module
++++ b/workbench_moderation_notes.module
+@@ -66,3 +66,39 @@ function workbench_moderation_notes_form_workbench_moderation_moderate_form_alte
+     drupal_redirect_form($form_state);
+   }
+ }
++
++/**
++ * Implements hook_token_info().
++ */
++function workbench_moderation_notes_token_info() {
++  // Node tokens.
++  $info['tokens']['node']['workbench-moderation-notes'] = array(
++    'name' => t('Current Workbench moderation notes'),
++    'description' => t('Current Workbench moderation note for the node.'),
++    'type' => 'array',
++  );
++  return $info;
++}
++
++/**
++ * Implements hook_tokens().
++ */
++function workbench_moderation_notes_tokens($type, $tokens, array $data = array(), array $options = array()) {
++  $replacements = array();
++  // Node tokens.
++  if ($type == 'node' && !empty($data['node'])) {
++    $node = $data['node'];
++    $state = '';
++    if (is_object($node) && property_exists($node, 'workbench_moderation') && isset($node->workbench_moderation['current'])){
++       $state = $node->workbench_moderation['current'];
++    }
++    foreach ($tokens as $name => $original) {
++      switch ($name) {
++        case 'workbench-moderation-notes':
++            $replacements[$original] = $state->note;
++            break;
++       }
++    }
++  }
++  return $replacements;
++}

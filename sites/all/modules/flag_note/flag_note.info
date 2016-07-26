@@ -1,0 +1,17 @@
+name = Flag note
+description = Allows users to add notes while flagging content with the Flag module
+core = 7.x
+dependencies[] = flag
+files[] = includes/views_handler_field_flag_note_link_delete.inc
+files[] = includes/views_handler_field_flag_note_link_edit.inc
+files[] = includes/views_handler_field_flag_note_link_js_edit.inc
+package = Flags
+
+
+
+; Information added by drupal.org packaging script on 2013-09-30
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "flag_note"
+datestamp = "1380579486"
+

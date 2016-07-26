@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Course Selection feature.
+ */
+
+include_once 'course_selection.features.inc';

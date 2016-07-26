@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Business Finder Supplemental Views feature.
+ */
+
+include_once 'business_finder_supplemental_views.features.inc';

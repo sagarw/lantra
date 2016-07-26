@@ -1,0 +1,11 @@
+name = Facet API image links
+description = Display images in a Facet API links widget
+core = 7.x
+files[] = plugins/facetapi/widget_image_links.inc
+
+; Information added by Drupal.org packaging script on 2014-03-03
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "facetapi_image_links"
+datestamp = "1393839216"
+

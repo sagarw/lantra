@@ -1,0 +1,10 @@
+name = Business finder Filter by region
+description = Business finder Filter by region
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = facetapi
+dependencies[] = fe_block
+features[fe_block_settings][] = facetapi-PrRkkPcSQeNZNRi52G1e5TFoVa1ITCtJ
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

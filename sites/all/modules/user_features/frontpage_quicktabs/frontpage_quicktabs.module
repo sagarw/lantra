@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Frontpage Quicktabs feature.
+ */
+
+include_once 'frontpage_quicktabs.features.inc';

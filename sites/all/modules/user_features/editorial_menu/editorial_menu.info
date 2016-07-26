@@ -1,0 +1,10 @@
+name = Editorial Menu
+description = Editorial Menu
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = menu
+features[fe_block_settings][] = menu-menu-editorial-menu
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

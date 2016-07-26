@@ -1,0 +1,15 @@
+name = LA Course Flags
+description = LA Course Flags
+core = 7.x
+package = Lantra Flag Settings
+version = 7.x-1.5
+dependencies[] = flag
+features[features_api][] = api:2
+features[flag][] = la_course_approved
+features[flag][] = la_course_local_approved
+features[flag][] = la_course_local_pending_approval
+features[flag][] = la_course_pending_approval
+features[flag][] = locally
+features[flag][] = nationwide
+features[flag][] = requires_approval
+project path = sites/all/modules/user_features

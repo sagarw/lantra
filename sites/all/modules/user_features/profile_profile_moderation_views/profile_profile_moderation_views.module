@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Profile / Profile Moderation Views feature.
+ */
+
+include_once 'profile_profile_moderation_views.features.inc';

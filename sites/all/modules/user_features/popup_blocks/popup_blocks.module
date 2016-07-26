@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Popup Blocks feature.
+ */
+
+include_once 'popup_blocks.features.inc';

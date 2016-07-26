@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the LA Course Flags feature.
+ */
+
+include_once 'la_course_flags.features.inc';

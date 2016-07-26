@@ -1,0 +1,10 @@
+name = Printer, email and PDF block
+description = Printer, email and PDF block
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = print_ui
+features[fe_block_settings][] = print_ui-print-links
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

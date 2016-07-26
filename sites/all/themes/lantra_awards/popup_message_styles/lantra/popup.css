@@ -1,0 +1,72 @@
+#popup-message-background {
+  display: none;
+  position: fixed;
+  _position: absolute; /* hack for internet explorer 6*/
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #000000;
+  border: 1px solid #cecece;
+  z-index: 999;
+   opacity: 0.85 !important;
+}
+
+/************************ Pop up login box ********************/
+#popup-message-window {
+  	background: #e7e7e7 none repeat scroll 0 0;
+    border: 10px solid #b72c29;
+    border-radius: 0;
+    color: #fff;
+    display: none;
+    font-size: 13px;
+    height: 250px !important;
+    left: 0 !important;
+    margin: auto !important;
+    overflow: auto;
+    padding: 12px;
+    position: absolute;
+    right: 0 !important;
+    width: 600px !important;
+    z-index: 1000;
+
+
+
+      display: none;
+  position: fixed;
+  _position: absolute; /* hack for internet explorer 6*/
+  overflow: auto;
+}
+
+#popup-message-close {
+    background: transparent url(img/close.png) no-repeat top left;
+    text-indent: -1000px;
+    width: 16px;
+    height: 16px;
+    font-size: 0px;
+    right: 6px;
+    top: 4px;
+    position: absolute;
+    display: block;
+    cursor: pointer;
+}
+
+#popup-message-window h1.popup-message-title {
+    border-bottom: 1px dotted #d3d3d3;
+    color: black;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 2px;
+    text-align: left;
+    color: #333f48;
+}
+
+#popup-message-window {
+    color: #333f48;
+    font-size: 13px;
+}
+
+#popup-message-content > p {
+    margin-bottom: 15px;
+}

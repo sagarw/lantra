@@ -1,0 +1,8 @@
+name = Course search container block
+description = Block containing mefibs course search
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.1
+features[features_api][] = api:2
+features_exclude[dependencies][fe_block] = fe_block
+project path = sites/all/modules/user_features

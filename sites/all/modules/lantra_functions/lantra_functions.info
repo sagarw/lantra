@@ -1,0 +1,4 @@
+name = Lantra Functions
+description = Supplemental functions for Lantra Awards.
+core = 7.x
+configure = admin/config/lantra/functions

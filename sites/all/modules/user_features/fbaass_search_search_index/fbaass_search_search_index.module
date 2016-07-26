@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the FBAASS Search Search Index feature.
+ */
+
+include_once 'fbaass_search_search_index.features.inc';

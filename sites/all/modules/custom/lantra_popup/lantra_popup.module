@@ -1,0 +1,11 @@
+<?php
+/**
+ * @file
+ * Module file for Lantra Popup Module
+ */
+
+/**
+ * Implements hook_user_login().
+ */
+function welcome_user_login(&$edit, $account) {
+}

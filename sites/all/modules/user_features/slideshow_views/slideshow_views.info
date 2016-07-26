@@ -1,0 +1,13 @@
+name = Slideshow Views
+description = Drupal Homepage Slideshow Views
+core = 7.x
+package = Lantra Views Features
+version = 7.x-1.3
+dependencies[] = flexslider_views
+dependencies[] = views
+dependencies[] = views_slideshow
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = slideshow_views
+features_exclude[dependencies][ctools] = ctools
+project path = sites/all/modules/user_features

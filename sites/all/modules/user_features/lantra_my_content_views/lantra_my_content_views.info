@@ -1,0 +1,15 @@
+name = Lantra My Content Views
+description = Lantra My Content Views
+core = 7.x
+package = Lantra Views Features
+version = 7.x-1.11
+dependencies[] = colorbox
+dependencies[] = colorbox_node
+dependencies[] = views
+dependencies[] = views_data_export
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = moderation_notes
+features[views_view][] = my_content_views
+features_exclude[dependencies][ctools] = ctools
+project path = sites/all/modules/user_features

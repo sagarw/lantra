@@ -1,0 +1,10 @@
+name = Qualification Level sort block
+description = Qualification Level sort block
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = facetapi
+dependencies[] = fe_block
+features[fe_block_settings][] = facetapi-Lq6X0zM6E1GgqNWZHq3bLbT64FwJtyl1
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

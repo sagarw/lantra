@@ -1,0 +1,11 @@
+name = Business Listing VIews
+description = Business Listing Views
+core = 7.x
+package = Lantra Views Features
+version = 7.x-1.4
+dependencies[] = ctools
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = business_listing_views
+project path = sites/all/modules/user_features

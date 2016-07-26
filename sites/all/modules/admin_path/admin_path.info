@@ -1,0 +1,12 @@
+name = Administrative pages
+description = Allows users to configure which pages are to be considered administrative.
+core = 7.x
+package = Administration
+configure = admin/config/user-interface/admin-path
+
+; Information added by drupal.org packaging script on 2013-09-30
+version = "7.x-1.0+5-dev"
+core = "7.x"
+project = "admin_path"
+datestamp = "1380552867"
+

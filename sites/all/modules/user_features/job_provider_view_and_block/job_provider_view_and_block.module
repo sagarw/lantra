@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Job 'Provider' view and block feature.
+ */
+
+include_once 'job_provider_view_and_block.features.inc';

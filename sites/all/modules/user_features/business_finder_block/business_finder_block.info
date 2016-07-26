@@ -1,0 +1,11 @@
+name = Business Finder Block
+description = Business Finder Block, and business finder tabs
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.4
+dependencies[] = fe_block
+dependencies[] = views
+features[fe_block_settings][] = views-15d364c6b1e7b5b6ec37f2467e668539
+features[fe_block_settings][] = views-dc0dc7a86b47e38913c826044dc0091c
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

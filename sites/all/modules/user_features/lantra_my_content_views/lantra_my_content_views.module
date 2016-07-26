@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Lantra My Content Views feature.
+ */
+
+include_once 'lantra_my_content_views.features.inc';

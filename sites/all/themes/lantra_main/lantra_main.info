@@ -1,0 +1,37 @@
+name =  Lantra Main Theme
+description = Lantra Main theme 
+core 	= 7.x
+engine  = phptemplate
+screenshot = screenshot.jpg
+package = Own
+base theme = lantra_awards
+
+
+regions[header] 	        = Header
+regions[leftheader] 	    = Left Header
+regions[middleleftheader] 	= Middle Left Header
+regions[middlerightheader] 	= Middle Right Header
+regions[rightheader] 	    = Right Header
+
+regions[regional_menu]     = Lantra Regional menu
+regions[main_menu]         = Lantra menu
+regions[slider]            = Slider
+regions[hero_image_region] = Hero Image
+regions[left] 		       = Left
+regions[right] 		       = Right
+
+regions[topcontent] = Top Content
+regions[content]    = Content
+
+regions[hometabs] 	    = Home Tabs 
+regions[homeright] 	    = Home Right 
+regions[homemiddle] 	= Home Middle 
+regions[homeleft] 	    = Home Left 
+
+regions[search]     = Search Form
+regions[footer] 	= Footer
+
+regions[leftfooter] 	    = Left Footer
+regions[middleleftfooter] 	= Middle Left Footer
+regions[middlerightfooter] 	= Middle Right Footer
+regions[rightfooter] 	    = Right Footer

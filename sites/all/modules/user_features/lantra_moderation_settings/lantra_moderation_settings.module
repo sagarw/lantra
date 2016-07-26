@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Lantra Moderation Settings feature.
+ */
+
+include_once 'lantra_moderation_settings.features.inc';

@@ -1,0 +1,143 @@
+<?php
+
+/**
+ * @file
+ * This file contains the main code for the Workbench Profile module.
+ *
+ * @author Nuno Veloso (nuno@nuno.cat)
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function workbench_profile_menu() {
+  $items = array();
+
+  // Module settings.
+  $items["admin/config/workbench/profile"] = array(
+    'title' => 'Workbench Profile',
+    'description' => 'Configure workbench profile behaviour.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('workbench_profile_admin_form'),
+    'access arguments' => array('administer profiles'),
+    'file' => 'workbench_profile.admin.inc',
+  );
+  
+  return $items;
+}
+
+
+/**
+ * Implements hook_menu_alter().
+ */
+function workbench_profile_menu_alter(&$items) {
+  // Provide a container administration menu item, if one doesn't already exist.
+  if (!isset($items['admin/config/workbench'])) {
+    $items['admin/config/workbench'] = array(
+      'title' => 'Workbench',
+      'description' => 'Workbench',
+      'page callback' => 'system_admin_menu_block_page',
+      'access arguments' => array('administer site configuration'),
+      'position' => 'right',
+      'file' => 'system.admin.inc',
+      'file path' => drupal_get_path('module', 'system'),
+    );
+  }
+}
+
+
+/**
+ * Implements hook_workbench_create_alter().
+ *
+ * Add a Profile creation section to the workbench "Create Content" tab.
+ */
+function workbench_profile_workbench_create_alter(&$output) {
+
+  if (user_access('administer users')) {
+    // Mimic node_add_page() theming.
+    $items = array();
+
+    $types = profile2_get_types();
+
+    foreach ($types as $type => $info) {
+      if (user_access('administer profiles') || user_access("edit any $type profile")) {
+        $settings = $info->data;
+        $localized_options = array();
+        
+        if ($settings['registration']) {
+          $localized_options = array();
+          $description = t('Add an %user_type entity, creating the user associated to it.', array('%user_type' => $info->label));
+        }
+        else {
+          $localized_options['query'] = array('profile' => $type);
+          $description = t('Add an %user_type entity, creating the user first.', array('%user_type' => $info->label));
+        }
+
+        $items[] = array(
+          'title' => $info->label,
+          'href' => 'admin/people/create',
+          'localized_options' => $localized_options,
+          'description' => $description,
+        );
+      }
+    }
+    
+    if (!empty($items)) {
+      $output['workbench_create_profile2'] = array(
+        '#title' => t('Create profile'),
+        '#markup' => theme('node_add_list', array('content' => $items)),
+        '#theme' => 'workbench_element',
+        '#weight' => 1, 
+      );
+      
+      $_GET['destination'] = drupal_get_destination();
+    }
+  }
+}
+
+
+/**
+ * Implements hook_user_insert().
+ *
+ * Redirect to correct Profile creation after User creation form.
+ */
+function workbench_profile_user_insert(&$edit, $account, $category) {
+
+  if (isset($_GET['profile'])) {
+    $profile_type_info = profile2_get_types(check_plain($_GET['profile']));
+
+    if (user_access("edit any $profile_type_info->type profile")) {
+      if ($profile_type_info->data['use_page']) {
+        drupal_goto("profile-$profile_type_info->type/$account->uid/edit");
+      }
+      else {
+        drupal_goto("user/$account->uid/edit/$profile_type_info->type");
+      }
+    }
+  }
+}
+
+
+/**
+ * Implements hook_entity_insert().
+ */
+function workbench_profile_entity_insert($entity, $type) {
+
+  if ($type == 'profile2') {
+    
+    switch (variable_get('workbench_profile_redirect', 'my_workbench')) {
+      case 'my_workbench':
+        drupal_goto('admin/workbench/create');
+        break;
+        
+      case 'profile_view':
+        drupal_goto("user/$entity->uid");
+        break;
+        
+      case 'create_more':
+      default:
+        break;
+    }
+  }
+}

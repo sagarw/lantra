@@ -1,0 +1,85 @@
+@charset "utf-8";
+/* CSS Document */
+
+p {
+	/*margin: 0 0 10px; */
+	padding: 0;
+	color: #333f48;
+	font-size: 14px;
+}
+
+
+ img {
+	float: right;
+}
+
+.field-label {
+    display: inline-block;
+    float: left;
+    width: 250px;
+    color: #b72c29;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+label {
+    color: red;
+}
+
+.node-type-lantra-awards-course .field-items,
+.node-type-la-course .field-items {
+    display: inline-block;
+    float: right;
+    width: 100%;
+}
+
+.field .field-label-inline {
+	/*padding-bottom: 15px;*/
+}
+
+
+ul li {
+    list-style: disc;
+}
+
+
+
+
+.footer {
+    background: #333f48 none repeat scroll 0 0;
+    padding: 25px 0;
+}
+
+.footer p {
+	color: #fff;
+}
+
+.pdf-row {
+    /*display: inline;*/
+}
+
+.pdf-label {
+    color: #b72c29;
+    font-size: 12px;
+    line-height: 10px;
+    display: inline-block;
+    /*font-weight: bold;*/
+}
+
+.pdf-field {
+    /*display: inline;
+    float: right;
+    border: 1px solid #000;
+    position: relative;*/
+}
+
+.pdf-field p { 
+}
+
+.pdf-title,
+h2  {
+    font-size: 18px;
+    text-align: center;
+    color: #53682b;
+}
+

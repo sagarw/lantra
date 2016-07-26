@@ -1,0 +1,10 @@
+name = Search Sorts Block
+description = Block settings for all search sorts
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.3
+dependencies[] = fe_block
+dependencies[] = search_api_sorts
+features[fe_block_settings][] = search_api_sorts-search-sorts
+features[features_api][] = api:2
+project path = sites/all/modules/user_features

@@ -1,0 +1,10 @@
+name = Same parent
+description = Views block for Same parent view
+core = 7.x
+package = Lantra Block Settings
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = views
+features[fe_block_settings][] = views-79151fb09e58262dd406efef0b027977
+features[features_api][] = api:2
+project path = sites/all/modules/user_features
